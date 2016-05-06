@@ -21,7 +21,7 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<div class="row">
-						  <button class="btn waves-effect waves-light col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 sss-cmc " type="submit" name="loginSubmit" id="loginSubmit">Log In
+						  <button class="btn waves-effect waves-light col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 sss-cmc " value="1" type="submit" name="loginSubmit" id="loginSubmit">Log In
 						  </button>
 					</div>
 				</div>
@@ -70,28 +70,92 @@
 <script src="https://royalflush.in/myaccount/assets/js/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 
 <script src="https://royalflush.in/myaccount/assets/js/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
-
-<script src="login.js" type="text/javascript"></script>
-<!-- END PAGE LEVEL PLUGINS -->
 <script>
-    jQuery(document).ready(function () {
-    	
-        Login.init();
-        //toastr Notification initialisation
-       toastr.options = {
-"closeButton": true,
-"progressBar": true,
-"showDuration": "300",
-"hideDuration": "1000",
-"timeOut": "5000",
-"extendedTimeOut": "1000",
-"showEasing": "swing",
-"hideEasing": "linear",
-"showMethod": "fadeIn",
-"hideMethod": "fadeOut"
-};
-    });
+				$(document).ready(function(){
+					toastr.options = {
+						"closeButton": true,
+						"progressBar": true,
+						"showDuration": "300",
+						"hideDuration": "1000",
+						"timeOut": "5000",
+						"extendedTimeOut": "1000",
+						"showEasing": "swing",
+						"hideEasing": "linear",
+						"showMethod": "fadeIn",
+						"hideMethod": "fadeOut"
+					};
+					$("#loginForm").submit(function(){
+						$('#spinner').show();
+						var username = $('#loginUsername').val();
+						var pass = $('#loginPassword').val();
+						$.getJSON('http://royalflush.in/app/login_query.php?callback=?','username='+username+'&pass='+pass,function(res){
+						    if(res.loginStatus == "success"){
+						    	toastr.success('Lets Play Game','Login Successful');
+						    	var sessionKey1 = "http://166.62.32.78:8087/?LoginName="+username+"&SessionKey=" + res.sessionKey;
+                        		//alert('lets start '+ sessionKey);
+								localStorage.setItem("sessionID", sessionKey1);								
+						    	 $('#loginForm').each(function () {
+		                            this.reset();
+		                        });
+		                        $('#spinner').fadeOut(400);
+								window.location='./index.html';
+						    }
+						    if(res.loginStatus == "failure"){
+		                        if(res.failureReason == "noUsers"){
+		                            toastr.error('Please add Users First..!','No Users Exists..!');
+		                            $('#spinner').fadeOut(400);
+		                        }
+		                        if(res.failureReason == "noUserMatch"){
+		                            toastr.error('Please try again..!','No User exists with this Username');
+		                            $('#loginForm').each(function () {
+		                                this.reset();
+		                            });
+		                            $('#spinner').fadeOut(400);
+		                        }
+		                        if(res.failureReason == "noPasswordMatch"){
+		                            toastr.error('Please try again..!','WRONG PASSWORD');
+		                            $('#loginForm').each(function () {
+		                                this.reset();
+		                            });
+		                            $('#spinner').fadeOut(400);
+		                        }
+		                        if(res.failureReason == "noPassword"){
+		                            toastr.error('Please try again..!','Please enter a Password');
+		                            $('#loginForm').each(function () {
+		                                this.reset();
+		                            });
+		                            $('#spinner').fadeOut(400);
+		                        }
+		                        if(res.failureReason == "noUsername"){
+		                            toastr.error('Please try again..!','Please enter a Username First');
+		                            $('#loginForm').each(function () {
+		                                this.reset();
+		                            });
+		                            $('#spinner').fadeOut(400);
+		                        }
+		                        if(res.failureReason == "emailVerifyStatus"){
+		                            toastr.error('WAIT..!','Please Verify your Email First to Login');
+		                            $('#loginForm').each(function () {
+		                                this.reset();
+		                            });
+		                            $('#spinner').fadeOut(400);
+		                        }
+		                        if(res.failureReason == "smsVerifyStatus"){
+		                            toastr.error('WAIT..!','Please Verify your Phone First to Login');
+		                            $('#loginForm').each(function () {
+		                                this.reset();
+		                            });
+		                            $('#spinner').fadeOut(400);
+		                        }
+		                    }
+						});
+					    return false;
+					});
+				});
 </script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
 <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
