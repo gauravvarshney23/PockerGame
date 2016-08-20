@@ -20,11 +20,11 @@
   <preference name="android-minSdkVersion" value="7"/>
   <preference name="android-installLocation" value="auto"/>
   <preference name="loadUrlTimeoutValue" value="700000" />
-  <plugin name="org.apache.cordova.device" spec="0.3.0" source="pgb" />
-  <plugin name="org.apache.cordova.device-motion" spec="0.2.11" source="pgb" />
-  <plugin name="org.apache.cordova.device-orientation" spec="0.3.11" source="pgb" />
-  <plugin name="org.apache.cordova.inappbrowser" spec="0.6.0" source="pgb" />
-  <plugin name="org.apache.cordova.splashscreen" spec="1.0.0" source="pgb" />
+  <plugin name="cordova-plugin-device" spec="1.0.1" source="pgb" />
+  <plugin name="cordova-plugin-device-motion" spec="1.1.1" source="pgb" />
+  <plugin name="cordova-plugin-device-orientation" spec="1.0.1" source="pgb" />
+  <plugin name="cordova-plugin-inappbrowser" spec="1.0.1" source="pgb" />
+  <plugin name="cordova-plugin-splashscreen" spec="2.1.0" source="pgb" />
   <icon src="icon.png"/>
   <icon src="res/icon/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="res/icon/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
