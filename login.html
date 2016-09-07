@@ -4,7 +4,6 @@
     <title>Login Page - RoyalFlush</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="format-detection" content="telephone=no" />
-	<meta name="viewport" content="width=device-width">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta content="" name="description"/>
@@ -33,35 +32,232 @@
     <!-- BEGIN LOGIN FORM -->
     <form class="loginForm" id="loginForm" name="loginForm">
         <section class="container-fluid bg-cmc" id="login">
+			<div class="row">
+				<div class="col-lg-4 col-lg-offset-4 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+					<div class="row">
+						<div class="col-lg-13 s-cmc text-center"><p class="sin-cmc">Sign In</p></div>
+					</div>
+					<div class="row">
+						<div class="col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1 ss-cmc">
+							<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Username</h4>
+							<div class="row">
+								<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group ">
+								  <input class="form-control input-cmc  maxlength-handler" type="text" maxlength="12" placeholder="Username" name="loginUsername" id="loginUsername"/>
+								</div>
+							</div>
+							<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Password</h4>
+							<div class="row">
+								<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+								  <input class="form-control input-cmc maxlength-handler" type="password" maxlength="20" placeholder="Password" name="loginPassword" id="loginPassword"/>
+								</div>
+							</div>
+							<div class="row">
+								  <button class="btn waves-effect waves-light col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 sss-cmc " value="1" type="submit" name="loginSubmit" id="loginSubmit">Log In
+								  </button>
+								  <div class="col-lg-5 col-lg-offset-1 col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-xs-5 col-xs-offset-1 " id="fpw"><a href="javascript:;" id="forget-password" class="forget-password">Forget Password ? </a></div>
+								  <div class="col-lg-5 col-lg-offset-0 col-sm-5 col-sm-offset-0 col-md-5 col-md-offset-0 col-xs-5 col-xs-offset-0 " id="aa" ><a href="activate.html" >Account Activation</a></div>
+							</div>
+							<h4 class="text-center or-cmc">OR</h4>
+							<h3 class="text-center " id="ca"><a href="javascript:;" id="register-btn" class="ca-cmc">Create Account</a></h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+    </form>
+<!--New Code-->	
+	<!-- END LOGIN FORM -->
+    <!-- BEGIN FORGOT PASSWORD FORM -->
+    <form class="forgetForm" name="forgetForm" id="forgetForm" style="display: none;">
+       <!--forget password-->
+<section class="container-fluid bg-cmc" id="fp">
 	<div class="row">
 		<div class="col-lg-4 col-lg-offset-4 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
 			<div class="row">
-				<div class="col-lg-13 s-cmc text-center"><p class="sin-cmc">Sign In</p></div>
+				<div class="col-lg-13 s-cmc text-center"><p class="sin-cmc">Forget Password ?</p></div>
 			</div>
 			<div class="row">
 				<div class="col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1 ss-cmc">
-					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Username</h4>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Enter Your Royalflush Username</h4>
 					<div class="row">
 						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group ">
-						  <input class="form-control input-cmc  maxlength-handler" type="text" maxlength="12" placeholder="Username" name="loginUsername" id="loginUsername"/>
-						</div>
-					</div>
-					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Password</h4>
-					<div class="row">
-						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
-						  <input class="form-control input-cmc maxlength-handler" type="password" maxlength="20" placeholder="Password" name="loginPassword" id="loginPassword"/>
+						  <input class="form-control placeholder-no-fix maxlength-handler input-cmc" type="text" autocomplete="off" maxlength="12" placeholder="Username" name="resetUsername" id="resetUsername"/>
+						  <input type="hidden" name="device_type" value="mobile" />
 						</div>
 					</div>
 					<div class="row">
-						  <button class="btn waves-effect waves-light col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 sss-cmc " value="1" type="submit" name="loginSubmit" id="loginSubmit">Log In
-						  </button>
+						  <button class="btn waves-effect waves-light col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 sss-cmc " type="submit" id="forgot-btn" name="forgot-btn" value="forgot-btn">Recover Password</button>
+						
+						<div class="col-lg-5 col-lg-offset-0 col-sm-5 col-sm-offset-0 col-md-5 col-md-offset-0 col-xs-5 col-xs-offset-0 " id="aaf"><a href="activate.html">Account Activation</a></div>
 					</div>
+ 
+					<h4 class="text-center or-cmc">OR</h4>
+					<h3 class="text-center " id="caf"><a href="#" class="ca-cmc" id="back-btn">Log In</a></h3>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
     </form>
+    <!-- END FORGOT PASSWORD FORM -->
+    <!-- BEGIN REGISTRATION FORM -->
+   <form class="registerForm" id="registerForm" name="registerForm" style="display: none;">
+		<!-- create acciunt -->
+<section class="container-fluid bg-cmc" id="signin">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+			<div class="row">
+				<div class="col-lg-13 s-cmc text-center"><p class="sin-cmc">Create Account</p></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1 ss-ca-cmc">
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Choose your Username</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group ">
+						  <input class="form-control placeholder-no-fix maxlength-handler input-cmc" type="text" autocomplete="off" maxlength="12" placeholder="Choose Username (3 to 12 chars.)" name="playerName" id="playerName" aria-describedby="basic-addon1" />
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Choose your Password</h4>
+					<div class="row  password-strength">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+						   <input class="form-control placeholder-no-fix  maxlength-handler input-cmc" type="password" autocomplete="off" maxlength="20" placeholder="Password" id="signUpPassword" name="signUpPassword" />
+						   
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Re-type your Password</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+						  <input class="form-control placeholder-no-fix  input-cmc maxlength-handler" type="password" autocomplete="off"  aria-describedby="basic-addon1" maxlength="20" placeholder="Re-type Your Password" name="retypePassword" id="retypePassword"/>
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Full Name</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+						  <input class="form-control placeholder-no-fix input-cmc maxlength-handler" type="text" autocomplete="off" placeholder="Full Name" name="realFullName" id="realFullName" maxlength="30"/>
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Gender</h4>
+					<div class="row">
+						<div class="radio col-lg-5 col-lg-offset-1">
+						  <label>
+						    <input type="radio" name="genderbox" id="genderbox1" value="male" checked>
+						    Male
+						  </label>
+						</div>
+						<div class="radio col-lg-5 " style="margin-top: 10px !important;">
+						  <label>
+						     <input type="radio" name="genderbox" id="genderbox2" value="female">
+						    Female
+						  </label>
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">E-mail Id</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+						  <input class="form-control placeholder-no-fix maxlength-handler input-cmc" type="text" autocomplete="off" placeholder="Valid Email ID" name="contactEmail" id="contactEmail" maxlength="80"/>
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Select Birth Year</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+							<select name="birthYear" class="form-control input-cmc" id="birthYear">
+				                <option value="">Select Birth Year</option>	<!--Setting year option's values in document ready Jquery function -->			             
+				            </select>
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">State</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+							<select name="playerState" class="form-control input-cmc" id="playerState">
+				                <option value="">State</option>
+				                <option value="andaman-and-nicobar-islands">Andaman and Nicobar Islands</option>
+				                <option value="andhra-pradesh">Andhra Pradesh</option>
+				                <option value="arunachal-pradesh">Arunachal Pradesh</option>
+				                <option value="bihar">Bihar</option>
+				                <option value="chandigarh">Chandigarh</option>
+				                <option value="chhattisgarh">Chhattisgarh</option>
+				                <option value="dadra-and-nagar-haveli">Dadra and Nagar Haveli</option>
+				                <option value="daman-and-diu">Daman and Diu</option>
+				                <option value="delhi">Delhi</option>
+				                <option value="goa">Goa</option>
+				                <option value="gujarat">Gujarat</option>
+				                <option value="haryana">Haryana</option>
+				                <option value="himachal-pradesh">Himachal Pradesh</option>
+				                <option value="jammu-and-kashmir">Jammu and Kashmir</option>
+				                <option value="jharkhand">Jharkhand</option>
+				                <option value="karnataka">Karnataka</option>
+				                <option value="kerala">Kerala</option>
+				                <option value="lakshadweep">Lakshadweep</option>
+				                <option value="madhya-pradesh">Madhya Pradesh</option>
+				                <option value="maharashtra">Maharashtra</option>
+				                <option value="manipur">Manipur</option>
+				                <option value="meghalaya">Meghalaya</option>
+				                <option value="mizoram">Mizoram</option>
+				                <option value="nagaland">Nagaland</option>
+				                <option value="puducherry">Puducherry</option>
+				                <option value="punjab">Punjab</option>
+				                <option value="rajasthan">Rajasthan</option>
+				                <option value="sikkim">Sikkim</option>
+				                <option value="tamil-nadu">Tamil Nadu</option>
+				                <option value="telangana">Telangana</option>
+				                <option value="tripura">Tripura</option>
+				                <option value="uttar-pradesh">Uttar Pradesh</option>
+				                <option value="uttarakhand">Uttarakhand</option>
+				                <option value="west-bengal">West Bengal</option> 
+							</select>
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Your Valid 10 digit Mobile No</h4>
+					<div class="row">
+			        <div class="form-group">
+			            <div class="input-group col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 ">
+			                <span class="input-group-addon input-cmc  btn green"> +91 </span>
+			                <input class="form-control input-cmc placeholder-no-fix maxlength-handler" type="text" autocomplete="off"
+			                       placeholder="Valid 10 digit Mobile Phone No." name="contactPhone" id="contactPhone"
+			                       maxlength="10"/>
+			            </div>
+			        </div>
+			        </div>
+					<input type="hidden" name="device_type" value="mobile" />
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">City</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+						  <input class="form-control placeholder-no-fix maxlength-handler input-cmc" type="text" placeholder="City" autocomplete="off" name="playerCity" id="playerCity" maxlength="30"/>
+						</div>
+					</div>
+					<h4 style="padding-top: 10px; font-weight: 200; padding-left: 14px;">Refferal/Bonus Code</h4>
+					<div class="row">
+						<div class=" col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 input-group">
+						  <input class="form-control placeholder-no-fix maxlength-handler input-cmc" type="text" autocomplete="off" value="JOINROYAL" maxlength="12" placeholder="Referrer/Bonus Code" name="referrerCode" id="referrerCode"/>
+						</div>
+					</div>
+					<div class="row">
+			        <div class="form-group margin-top-20 margin-bottom-20 col-lg-10 col-lg-offset-1" style="padding-top: 10px; font-weight: 200; padding-left: 14px;">
+			            <label class="check" for="tnc">
+			                <input  type="checkbox" name="tnc" id="tnc"/> I agree to the <a
+			                    href="../TermsandConditions.php" target="_blank">
+			                    Terms of Service </a>
+			                & <a href="../PrivacyPolicy.php" target="_blank">
+			                    Privacy Policy </a>
+			            </label>
+			            <div id="register_tnc_error">
+			            </div>
+			        </div>
+			        </div>
+			        <div class="row">
+						  <button class="btn waves-effect waves-light col-lg-10 col-lg-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 sss-cmc " type="submit" id="register-submit-btn" name="register-submit-btn" value="register-submit-btn">Create Account</button>
+						 
+					</div>
+					<h4 class="text-center or-cmc">OR</h4>
+					<h3 class="text-center" id="li" ><a href="login.html" class="ca-cmc" id="back-btn">LOG IN</a></h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</form>
+    <!-- END REGISTRATION FORM -->
+<!--New Code-->	
 </div>
 
 <script src="https://royalflush.in/myaccount/assets/js/plugins/jquery.min.js" type="text/javascript"></script>
@@ -72,93 +268,41 @@
 
 <script src="https://royalflush.in/myaccount/assets/js/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
 <script>
-				$(document).ready(function(){
-					toastr.options = {
-						"closeButton": true,
-						"progressBar": true,
-						"showDuration": "300",
-						"hideDuration": "1000",
-						"timeOut": "5000",
-						"extendedTimeOut": "1000",
-						"showEasing": "swing",
-						"hideEasing": "linear",
-						"showMethod": "fadeIn",
-						"hideMethod": "fadeOut"
-					};
-					$("#loginForm").submit(function(){
-						$('#spinner').show();
-						var username = $('#loginUsername').val();
-						var pass = $('#loginPassword').val();
-						$.getJSON('http://royalflush.in/app/login_query.php?callback=?','username='+username+'&pass='+pass,function(res){
-						    if(res.loginStatus == "success"){
-						    	toastr.success('Lets Play Game','Login Successful');
-						    	var sessionKey1 = "http://166.62.32.78:8087/?LoginName="+username+"&SessionKey=" + res.sessionKey;
-                        		//alert('lets start '+ sessionKey);
-								localStorage.setItem("sessionID", sessionKey1);								
-						    	 $('#loginForm').each(function () {
-		                            this.reset();
-		                        });
-		                        $('#spinner').fadeOut(400);
-								window.location='./index.html';
-						    }
-						    if(res.loginStatus == "failure"){
-		                        if(res.failureReason == "noUsers"){
-		                            toastr.error('Please add Users First..!','No Users Exists..!');
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noUserMatch"){
-		                            toastr.error('Please try again..!','No User exists with this Username');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noPasswordMatch"){
-		                            toastr.error('Please try again..!','WRONG PASSWORD');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noPassword"){
-		                            toastr.error('Please try again..!','Please enter a Password');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noUsername"){
-		                            toastr.error('Please try again..!','Please enter a Username First');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "emailVerifyStatus"){
-		                            toastr.error('WAIT..!','Please Verify your Email First to Login');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "smsVerifyStatus"){
-		                            toastr.error('WAIT..!','Please Verify your Phone First to Login');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                    }
-						});
-					    return false;
-					});
-				});
+$(document).ready(function(){
+	toastr.options = {
+		"closeButton": true,
+		"progressBar": true,
+		"showDuration": "300",
+		"hideDuration": "1000",
+		"timeOut": "5000",
+		"extendedTimeOut": "1000",
+		"showEasing": "swing",
+		"hideEasing": "linear",
+		"showMethod": "fadeIn",
+		"hideMethod": "fadeOut"
+	};
+	var currentYear = new Date().getFullYear();
+	var x = document.getElementById("birthYear");
+	var option = null;
+	for(i=currentYear-19;i>1947;i--)
+	{
+		option = document.createElement("option");
+		option.text = i;
+		x.add(option);
+	}
+	
+	Login.init();
+	Demo.init();
+	
+});
 </script>
 
 <!-- END PAGE LEVEL PLUGINS -->
 
 <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+		<script src="js/demo.js" type="text/javascript"></script>
+		<script src="js/login.js" type="text/javascript"></script>
         <script type="text/javascript">
             app.initialize();
  </script>
