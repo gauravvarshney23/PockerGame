@@ -48,6 +48,16 @@ var Login = function() {
                 $('#spinner').show();
 				var username = $('#loginUsername').val();
 				var pass = $('#loginPassword').val();
+				
+				//Remember me option is required for storing the user name and password in local storage
+				if($('#rememberMe').prop("checked") == true){
+					localStorage.setItem("uName", username);
+					localStorage.setItem("uPassword", pass);
+				} else{
+					localStorage.removeItem("uName");
+					localStorage.removeItem("uPassword");
+				}
+				
 				$.getJSON('http://royalflush.in/app/login_query.php?callback=?','username='+username+'&pass='+ encodeURIComponent(pass),function(res){
 						    if(res.loginStatus == "success"){
 						    	toastr.success('Lets Play Game','Login Successful');
