@@ -46,31 +46,37 @@ var Login = function() {
 
             submitHandler: function() {
                 $('#spinner').show();
+				$('#load').show();
 				var username = $('#loginUsername').val();
 				var pass = $('#loginPassword').val();
-				
-				//Remember me option is required for storing the user name and password in local storage
-				if($('#rememberMe').prop("checked") == true){
-					localStorage.setItem("uName", username);
-					localStorage.setItem("uPassword", pass);
-				} else{
-					localStorage.removeItem("uName");
-					localStorage.removeItem("uPassword");
-				}
 				
 				$.getJSON('http://royalflush.in/app/login_query.php?callback=?','username='+username+'&pass='+ encodeURIComponent(pass),function(res){
 						    if(res.loginStatus == "success"){
 						    	toastr.success('Lets Play Game','Login Successful');
+								
+								//Remember me option is required for storing the user name and password in local storage
+								if($('#rememberMe').prop("checked") == true){
+									localStorage.setItem("uName", username);
+									localStorage.setItem("uPassword", pass);
+								} else{
+									localStorage.removeItem("uName");
+									localStorage.removeItem("uPassword");
+								}
+								
 						    	var sessionKey1 = "http://166.62.32.78:8087/?LoginName="+username+"&SessionKey=" + res.sessionKey;
                         		//alert('lets start '+ sessionKey);
-								localStorage.setItem("sessionID", sessionKey1);								
+								localStorage.setItem("sessionID", sessionKey1);
+								//$('#load').hide();
 						    	 $('#loginForm').each(function () {
 		                            this.reset();
 		                        });
-		                        $('#spinner').fadeOut(400);
-								window.location='index.html';
+								
+								$('#spinner').fadeOut(400,function(){
+										window.location.href = "index.html";
+									});
 						    }
 						    if(res.loginStatus == "failure"){
+								$('#load').hide();
 		                        if(res.failureReason == "noUsers"){
 		                            toastr.error('Please add Users First..!','No Users Exists..!');
 		                            $('#spinner').fadeOut(400);
