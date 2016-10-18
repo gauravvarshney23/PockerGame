@@ -21,7 +21,7 @@
   <preference name="android-installLocation" value="auto"/>
   <preference name="loadUrlTimeoutValue" value="700000" />
   <gap:plugin name="org.apache.cordova.splashscreen"/>
-  <gap:plugin name="org.apache.cordova.inappbrowser"/>
+  <plugin name="cordova-plugin-inappbrowser" />
   <icon src="img/icon.png"/>
   <icon src="img/icon.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="img/icon.png" gap:platform="android" gap:qualifier="mdpi"/>
