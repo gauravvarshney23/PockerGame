@@ -66,6 +66,6 @@
   </platform>
   <platform name="ios">
     <allow-intent href="*"/>
-    <allow-navigation href="*" />
+    <allow-navigation href="*"/>
   </platform>
 </widget>
