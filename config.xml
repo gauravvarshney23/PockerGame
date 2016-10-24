@@ -55,6 +55,8 @@
   <gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
   <access origin="*"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
+  <allow-navigation href="*" iframe="true" />
+  <allow-intent href="*"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -65,7 +67,7 @@
     <allow-intent href="market:*"/>
   </platform>
   <platform name="ios">
-    <allow-intent href="*"/>
-    <allow-navigation href="*"/>
+    <allow-intent href="itms:*"/>
+    <allow-intent href="itms-apps:*"/>
   </platform>
 </widget>
