@@ -49,8 +49,20 @@ var Login = function() {
 				$('#load').show();
 				var username = $('#loginUsername').val();
 				var pass = $('#loginPassword').val();
+				var latitude;
+				var longitude;
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(showLocation);
+				} else { 
+					alert('Geolocation is not supported by this device.');
+				}
 				
-				$.getJSON('http://royalflush.in/app/login_query.php?callback=?','username='+username+'&pass='+ encodeURIComponent(pass),function(res){
+				function showLocation(position) {
+					latitude = position.coords.latitude;
+					longitude = position.coords.longitude;
+				}
+				
+				$.getJSON('http://royalflush.in/app/login_query.php?callback=?','username='+username+'&pass='+ encodeURIComponent(pass) +'&latitude='+latitude+'&longitude='+longitude, function(res){
 						    if(res.loginStatus == "success"){
 						    	toastr.success('Lets Play Game','Login Successful');
 								
@@ -497,16 +509,12 @@ var Login = function() {
             jQuery('.registerForm').hide();
         });
     }
-
     return {
         //main function to initiate the module
         init: function() {
             handleLogin();
             handleForgetPassword();
             handleRegister();
-
         }
-
     };
-
 }();
