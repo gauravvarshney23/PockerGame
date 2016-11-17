@@ -89,6 +89,14 @@ var Login = function() {
 						    }
 						    if(res.loginStatus == "failure"){
 								$('#load').hide();
+					if(res.failureReason == "noLocation"){
+					    toastr.error('We are unable to find you location..!','Please switch on your GPS..!');
+					    $('#spinner').fadeOut(400);
+					}
+					if(res.failureReason == "notValidCountry"){
+					    toastr.error('We can not continue with you..!','This App is only for Indians..!');
+					    $('#spinner').fadeOut(400);
+					}
 		                        if(res.failureReason == "noUsers"){
 		                            toastr.error('Please add Users First..!','No Users Exists..!');
 		                            $('#spinner').fadeOut(400);
