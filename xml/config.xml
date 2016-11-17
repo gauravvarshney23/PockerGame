@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.RoyalFlush" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.RoyalFlush" version="1.0.1">
   <name>RoyalFlush</name>
   <description>RoyalFlush sample application that responds to the deviceready event.</description>
   <author href="http://phonegap.com" email="support@phonegap.com">RoyalFlush Team</author>
@@ -21,6 +21,8 @@
   <preference name="android-installLocation" value="auto"/>
   <preference name="loadUrlTimeoutValue" value="700000" />
   <gap:plugin name="org.apache.cordova.splashscreen"/>
+  <gap:plugin name="org.apache.cordova.geolocation"/>
+  <plugin name="cordova-plugin-inappbrowser" />
   <icon src="img/icon.png"/>
   <icon src="img/icon.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="img/icon.png" gap:platform="android" gap:qualifier="mdpi"/>
@@ -54,6 +56,8 @@
   <gap:splash src="res/screen/windows-phone/screen-portrait.jpg" gap:platform="winphone"/>
   <access origin="*"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
+  <allow-navigation href="*" iframe="true" />
+  <allow-intent href="*"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
