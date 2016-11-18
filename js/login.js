@@ -1,3 +1,14 @@
+var latitude = "";
+var longitude = "";
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(showLocation);
+} else {
+	alert('Geolocation is not supported by this device.');
+}
+function showLocation(position) {
+	latitude = position.coords.latitude;
+	longitude = position.coords.longitude;
+}
 var Login = function() {
     var handleLogin = function() {
         $('#loginForm').validate({
@@ -9,7 +20,7 @@ var Login = function() {
                 loginUsername: {
                     required: true,
                     playerNameTest: true,
-                    rangelength: [3,12]
+                    rangelength: [3, 12]
                 },
                 loginPassword: {
                     required: true,
@@ -46,103 +57,91 @@ var Login = function() {
 
             submitHandler: function() {
                 $('#spinner').show();
-				$('#load').show();
-				var username = $('#loginUsername').val();
-				var pass = $('#loginPassword').val();
-				var latitude;
-				var longitude;
-				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(showLocation);
-				} else { 
-					alert('Geolocation is not supported by this device.');
-				}
+                $('#load').show();
+                var username = $('#loginUsername').val();
+                var pass = $('#loginPassword').val();
 				
-				function showLocation(position) {
-					latitude = position.coords.latitude;
-					longitude = position.coords.longitude;
-				}
-				
-				$.getJSON('http://royalflush.in/app/login_query.php?callback=?','username='+username+'&pass='+ encodeURIComponent(pass) +'&latitude='+latitude+'&longitude='+longitude, function(res){
-						    if(res.loginStatus == "success"){
-						    	toastr.success('Lets Play Game','Login Successful');
-								
-								//Remember me option is required for storing the user name and password in local storage
-								if($('#rememberMe').prop("checked") == true){
-									localStorage.setItem("uName", username);
-									localStorage.setItem("uPassword", pass);
-								} else{
-									localStorage.removeItem("uName");
-									localStorage.removeItem("uPassword");
-								}
-								
-						    	var sessionKey1 = "http://166.62.32.78:8087/?LoginName="+username+"&SessionKey=" + res.sessionKey;
-                        		//alert('lets start '+ sessionKey);
-								localStorage.setItem("sessionID", sessionKey1);
-								//$('#load').hide();
-						    	 $('#loginForm').each(function () {
-		                            this.reset();
-		                        });
-								
-								$('#spinner').fadeOut(400,function(){
-										window.location.href = "index.html";
-									});
-						    }
-						    if(res.loginStatus == "failure"){
-								$('#load').hide();
-					if(res.failureReason == "noLocation"){
-					    toastr.error('We are unable to find you location..!','Please switch on your GPS..!');
-					    $('#spinner').fadeOut(400);
-					}
-					if(res.failureReason == "notValidCountry"){
-					    toastr.error('We can not continue with you..!','This App is only for Indians..!');
-					    $('#spinner').fadeOut(400);
-					}
-		                        if(res.failureReason == "noUsers"){
-		                            toastr.error('Please add Users First..!','No Users Exists..!');
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noUserMatch"){
-		                            toastr.error('Please try again..!','No User exists with this Username');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noPasswordMatch"){
-		                            toastr.error('Please try again..!','WRONG PASSWORD');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noPassword"){
-		                            toastr.error('Please try again..!','Please enter a Password');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                        if(res.failureReason == "noUsername"){
-		                            toastr.error('Please try again..!','Please enter a Username First');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-		                            });
-		                            $('#spinner').fadeOut(400);
-		                        }
-		                       
-		                        if(res.failureReason == "smsVerifyStatus"){
-		                            toastr.error('WAIT..!','Please Verify your Phone First to Login');
-		                            $('#loginForm').each(function () {
-		                                this.reset();
-										
-		                            });
-		                            $('#spinner').fadeOut(400,function(){
-										window.location.href = "activate.html";
-									});
-		                        }
-		                    }
-						});
-				
+                $.getJSON('http://royalflush.in/app/login_query.php?callback=?','&username=' + username + '&pass=' + encodeURIComponent(pass) + '&latitude=' + latitude + '&longitude=' + longitude, function(res) {
+                    if (res.loginStatus == "success") {
+                        toastr.success('Lets Play Game', 'Login Successful');
+
+                        //Remember me option is required for storing the user name and password in local storage
+                        if ($('#rememberMe').prop("checked") == true) {
+                            localStorage.setItem("uName", username);
+                            localStorage.setItem("uPassword", pass);
+                        } else {
+                            localStorage.removeItem("uName");
+                            localStorage.removeItem("uPassword");
+                        }
+
+                        var sessionKey1 = "http://166.62.32.78:8087/?LoginName=" + username + "&SessionKey=" + res.sessionKey;
+                        //alert('lets start '+ sessionKey);
+                        localStorage.setItem("sessionID", sessionKey1);
+                        //$('#load').hide();
+                        $('#loginForm').each(function() {
+                            this.reset();
+                        });
+
+                        $('#spinner').fadeOut(400, function() {
+                            window.location.href = "index.html";
+                        });
+                    }
+                    if (res.loginStatus == "failure") {
+                        $('#load').hide();
+                        if (res.failureReason == "noLocation") {
+                            toastr.error('We are unable to find you location..!', 'Please switch on your GPS..!');
+                            $('#spinner').fadeOut(400);
+                        }
+                        if (res.failureReason == "notValidCountry") {
+                            toastr.error('We can not continue with you..!', 'This App is only for Indians..!');
+                            $('#spinner').fadeOut(400);
+                        }
+                        if (res.failureReason == "noUsers") {
+                            toastr.error('Please add Users First..!', 'No Users Exists..!');
+                            $('#spinner').fadeOut(400);
+                        }
+                        if (res.failureReason == "noUserMatch") {
+                            toastr.error('Please try again..!', 'No User exists with this Username');
+                            $('#loginForm').each(function() {
+                                this.reset();
+                            });
+                            $('#spinner').fadeOut(400);
+                        }
+                        if (res.failureReason == "noPasswordMatch") {
+                            toastr.error('Please try again..!', 'WRONG PASSWORD');
+                            $('#loginForm').each(function() {
+                                this.reset();
+                            });
+                            $('#spinner').fadeOut(400);
+                        }
+                        if (res.failureReason == "noPassword") {
+                            toastr.error('Please try again..!', 'Please enter a Password');
+                            $('#loginForm').each(function() {
+                                this.reset();
+                            });
+                            $('#spinner').fadeOut(400);
+                        }
+                        if (res.failureReason == "noUsername") {
+                            toastr.error('Please try again..!', 'Please enter a Username First');
+                            $('#loginForm').each(function() {
+                                this.reset();
+                            });
+                            $('#spinner').fadeOut(400);
+                        }
+
+                        if (res.failureReason == "smsVerifyStatus") {
+                            toastr.error('WAIT..!', 'Please Verify your Phone First to Login');
+                            $('#loginForm').each(function() {
+                                this.reset();
+
+                            });
+                            $('#spinner').fadeOut(400, function() {
+                                window.location.href = "activate.html";
+                            });
+                        }
+                    }
+                });
+
             }
 
         });
@@ -160,7 +159,7 @@ var Login = function() {
                 resetUsername: {
                     required: true,
                     playerNameTest: true,
-                    rangelength: [3,12]
+                    rangelength: [3, 12]
                 }
             },
             messages: {
@@ -188,40 +187,40 @@ var Login = function() {
             },
 
             submitHandler: function() {
-               $('#spinner').show();
-               $.post( "https://royalflush.in/myaccount/commands/forgotPasswordQuery.php",$( "#forgetForm" ).serialize(), function( data ) {
-                    if(data.forgotPasswordStatus == "success"){
-                        toastr.success('Please check your email.! It may be into your JUNK folder.','Your Password Reset Request was Successful.!');
-                        $('#forgetForm').each(function () {
+                $('#spinner').show();
+                $.post("https://royalflush.in/myaccount/commands/forgotPasswordQuery.php", $("#forgetForm").serialize(), function(data) {
+                    if (data.forgotPasswordStatus == "success") {
+                        toastr.success('Please check your email.! It may be into your JUNK folder.', 'Your Password Reset Request was Successful.!');
+                        $('#forgetForm').each(function() {
                             this.reset();
                         });
                         jQuery('.loginForm').show();
                         jQuery('.forgetForm').hide();
                         $('#spinner').fadeOut(400);
                     }
-                    if(data.forgotPasswordStatus == "failure"){
-                        if(data.failureReason == "noEmailSent"){
-                            toastr.error('Please try again..!','Password Reset Request email couldn"t be Sent.!');
+                    if (data.forgotPasswordStatus == "failure") {
+                        if (data.failureReason == "noEmailSent") {
+                            toastr.error('Please try again..!', 'Password Reset Request email couldn"t be Sent.!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "networkError"){
-                            toastr.error('Please try again..!','Network error.!');
+                        if (data.failureReason == "networkError") {
+                            toastr.error('Please try again..!', 'Network error.!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "gameServerError"){
-                            toastr.error('Please try again..!','Unknown Network error.!');
+                        if (data.failureReason == "gameServerError") {
+                            toastr.error('Please try again..!', 'Unknown Network error.!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noUserMatch"){
-                            toastr.error('Please try again..!','No User exists with this Username');
-                            $('#forgetForm').each(function () {
+                        if (data.failureReason == "noUserMatch") {
+                            toastr.error('Please try again..!', 'No User exists with this Username');
+                            $('#forgetForm').each(function() {
                                 this.reset();
                             });
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noUserExist"){
-                            toastr.error('Please add Users First..!','No Users Exists..!');
-                            $('#forgetForm').each(function () {
+                        if (data.failureReason == "noUserExist") {
+                            toastr.error('Please add Users First..!', 'No Users Exists..!');
+                            $('#forgetForm').each(function() {
                                 this.reset();
                             });
                             jQuery('.registerForm').show();
@@ -229,21 +228,21 @@ var Login = function() {
                             jQuery('.loginForm').hide();
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noUsername"){
-                            toastr.error('Please try again..!','No Username was entered.!');
-                            $('#forgetForm').each(function () {
+                        if (data.failureReason == "noUsername") {
+                            toastr.error('Please try again..!', 'No Username was entered.!');
+                            $('#forgetForm').each(function() {
                                 this.reset();
                             });
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noFormSubmit"){
-                            toastr.error('Please try again.!','Form Submit Error..!');
+                        if (data.failureReason == "noFormSubmit") {
+                            toastr.error('Please try again.!', 'Form Submit Error..!');
                             $('#spinner').fadeOut(400);
                         }
                     }
                     $('#spinner').fadeOut(400);
                 }, "jsonp").fail(function() {
-                    toastr.error('Please try again..!','There was a Network Error.!');
+                    toastr.error('Please try again..!', 'There was a Network Error.!');
                     $('#spinner').fadeOut(400);
                 });
             }
@@ -283,7 +282,7 @@ var Login = function() {
                 playerName: {
                     required: true,
                     playerNameTest: true,
-                    rangelength: [3,12]
+                    rangelength: [3, 12]
                 },
                 signUpPassword: {
                     required: true,
@@ -297,7 +296,7 @@ var Login = function() {
                 realFullName: {
                     required: true,
                     realNameTest: true,
-                    rangelength: [5,30]
+                    rangelength: [5, 30]
                 },
                 contactEmail: {
                     required: true,
@@ -314,7 +313,7 @@ var Login = function() {
                 playerCity: {
                     required: true,
                     realNameTest: true,
-                    rangelength: [3,30]
+                    rangelength: [3, 30]
 
                 },
                 birthYear: {
@@ -323,7 +322,7 @@ var Login = function() {
                 referrerCode: {
                     required: true,
                     playerNameTest: true,
-                    rangelength: [3,12]
+                    rangelength: [3, 12]
                 },
                 tnc: {
                     required: true
@@ -337,10 +336,10 @@ var Login = function() {
                 contactPhone: {
                     minlength: "Please enter valid 10 digits mobile number"
                 },
-                signUpPassword:{
+                signUpPassword: {
                     passwordTest: "Min 8 chars. Allowed chars. a-z,A-Z,0-9,-,@,%,+,!,#,$,^,?,_"
                 },
-                retypePassword:{
+                retypePassword: {
                     passwordTest: "Min 8 chars. Allowed chars. a-z,A-Z,0-9,-,@,%,+,!,#,$,^,?,_"
                 }
             },
@@ -370,129 +369,129 @@ var Login = function() {
             },
             submitHandler: function() {
                 $('#spinner').show();
-                $.post( "https://royalflush.in/myaccount/commands/accountRegisterQuery.php",$( "#registerForm" ).serialize(), function( data ) {
-                    if(data.registerStatus == "success"){
+                $.post("https://royalflush.in/myaccount/commands/accountRegisterQuery.php", $("#registerForm").serialize(), function(data) {
+                    if (data.registerStatus == "success") {
                         toastr.success('New Account Registration was Successful');
                         toastr.info('Please Verify your Email ID & Phone Number with Activation Codes we have sent to get access..! It may be into your JUNK folder.');
-                        $('#registerForm').each(function () {
+                        $('#registerForm').each(function() {
                             this.reset();
                         });
-                        
-						localStorage.setItem("phone", data.number);
-						localStorage.setItem("smscode", data.code);
-						
-						$('#spinner').fadeOut(400,function(){
-							window.location.href = "activate.html";
-						});
+
+                        localStorage.setItem("phone", data.number);
+                        localStorage.setItem("smscode", data.code);
+
+                        $('#spinner').fadeOut(400, function() {
+                            window.location.href = "activate.html";
+                        });
                     }
-                    if(data.registerStatus == "failure"){
-                        if(data.failureReason == "userAlreadyExist"){
-                            toastr.error('Please try different username..!','Username already taken..!');
+                    if (data.registerStatus == "failure") {
+                        if (data.failureReason == "userAlreadyExist") {
+                            toastr.error('Please try different username..!', 'Username already taken..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidPlayerName"){
-                            toastr.error('Please try different username..!','Invalid Username');
+                        if (data.failureReason == "invalidPlayerName") {
+                            toastr.error('Please try different username..!', 'Invalid Username');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noPlayerName"){
-                            toastr.error('Please enter proper username..!','No Username was Entered');
+                        if (data.failureReason == "noPlayerName") {
+                            toastr.error('Please enter proper username..!', 'No Username was Entered');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "passwordMismatch"){
-                            toastr.error('Please enter same password again for Retype Password.','Password Mismatch.!');
+                        if (data.failureReason == "passwordMismatch") {
+                            toastr.error('Please enter same password again for Retype Password.', 'Password Mismatch.!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidretypePassword"){
-                            toastr.error('Please enter only the allowed characters for password.','Invalid Retype Password..!');
+                        if (data.failureReason == "invalidretypePassword") {
+                            toastr.error('Please enter only the allowed characters for password.', 'Invalid Retype Password..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidsignUpPassword"){
-                            toastr.error('Please enter only the allowed characters for password.','Invalid Password..!');
+                        if (data.failureReason == "invalidsignUpPassword") {
+                            toastr.error('Please enter only the allowed characters for password.', 'Invalid Password..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noPassword"){
-                            toastr.error('Please enter Password.','No Password..!');
+                        if (data.failureReason == "noPassword") {
+                            toastr.error('Please enter Password.', 'No Password..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidRealFullName"){
-                            toastr.error('Please enter only the allowed characters for Real Name.','Invalid Real Name..!');
+                        if (data.failureReason == "invalidRealFullName") {
+                            toastr.error('Please enter only the allowed characters for Real Name.', 'Invalid Real Name..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noRealFullName"){
-                            toastr.error('Please enter Real Name.','No Real Name..!');
+                        if (data.failureReason == "noRealFullName") {
+                            toastr.error('Please enter Real Name.', 'No Real Name..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidGender"){
-                            toastr.error('Please select correct Gender.','Invalid Gender..!');
+                        if (data.failureReason == "invalidGender") {
+                            toastr.error('Please select correct Gender.', 'Invalid Gender..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noGender"){
-                            toastr.error('Please select correct Gender','No Gender..!');
+                        if (data.failureReason == "noGender") {
+                            toastr.error('Please select correct Gender', 'No Gender..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidbirthYear"){
-                            toastr.error('Please enter Correct Birth Year','Invalid Birth Year..!');
+                        if (data.failureReason == "invalidbirthYear") {
+                            toastr.error('Please enter Correct Birth Year', 'Invalid Birth Year..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "nobirthYear"){
-                            toastr.error('Please enter Birth Year','No Birth Year..!');
+                        if (data.failureReason == "nobirthYear") {
+                            toastr.error('Please enter Birth Year', 'No Birth Year..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "contactEmailAlreadyExist"){
-                            toastr.error('Please login with your account','Email ID already registered..!');
-                            $('#registerForm').each(function () {
+                        if (data.failureReason == "contactEmailAlreadyExist") {
+                            toastr.error('Please login with your account', 'Email ID already registered..!');
+                            $('#registerForm').each(function() {
                                 this.reset();
                             });
                             jQuery('.registerForm').hide();
                             jQuery('.loginForm').show();
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidcontactEmail"){
-                            toastr.error('Please enter Valid Email ID','Invalid Email ID');
+                        if (data.failureReason == "invalidcontactEmail") {
+                            toastr.error('Please enter Valid Email ID', 'Invalid Email ID');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "nocontactEmail"){
-                            toastr.error('Please enter Email ID','No Contact Email ID');
+                        if (data.failureReason == "nocontactEmail") {
+                            toastr.error('Please enter Email ID', 'No Contact Email ID');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "contactPhoneAlreadyExist"){
-                            toastr.error('Please login with your account','Contact Phone already registered.!');
-                            $('#registerForm').each(function () {
+                        if (data.failureReason == "contactPhoneAlreadyExist") {
+                            toastr.error('Please login with your account', 'Contact Phone already registered.!');
+                            $('#registerForm').each(function() {
                                 this.reset();
                             });
                             jQuery('.registerForm').hide();
                             jQuery('.loginForm').show();
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidcontactPhone"){
-                            toastr.error('Please enter valid Phone Number','Invalid Phone Number..!');
+                        if (data.failureReason == "invalidcontactPhone") {
+                            toastr.error('Please enter valid Phone Number', 'Invalid Phone Number..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "nocontactPhone"){
-                            toastr.error('Please enter valid Phone Number','No Phone Number..!');
+                        if (data.failureReason == "nocontactPhone") {
+                            toastr.error('Please enter valid Phone Number', 'No Phone Number..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidplayerState"){
-                            toastr.error('Please select correct State from the list','Invalid State Selected..!');
+                        if (data.failureReason == "invalidplayerState") {
+                            toastr.error('Please select correct State from the list', 'Invalid State Selected..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noplayerState"){
-                            toastr.error('Please select correct State from the list','No State Selected..!');
+                        if (data.failureReason == "noplayerState") {
+                            toastr.error('Please select correct State from the list', 'No State Selected..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "invalidplayerCity"){
-                            toastr.error('Please enter correct City Name','Invalid City Name..!');
+                        if (data.failureReason == "invalidplayerCity") {
+                            toastr.error('Please enter correct City Name', 'Invalid City Name..!');
                             $('#spinner').fadeOut(400);
                         }
-                        if(data.failureReason == "noplayerCity"){
-                            toastr.error('Please enter correct City Name','No City Name..!');
+                        if (data.failureReason == "noplayerCity") {
+                            toastr.error('Please enter correct City Name', 'No City Name..!');
                             $('#spinner').fadeOut(400);
                         }
 
                     }
                     $('#spinner').fadeOut(400);
                 }, "jsonp").fail(function() {
-                    toastr.error('Please try again..!','There was a Network Error.!');
+                    toastr.error('Please try again..!', 'There was a Network Error.!');
                     $('#spinner').fadeOut(400);
                 });
             }
