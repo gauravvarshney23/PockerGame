@@ -1,13 +1,30 @@
 var latitude = "";
 var longitude = "";
 if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(showLocation);
+    function success(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+    }
+
+    function fail(error) {
+        if (error.code == 1)
+            alert("GPS error message: " + error.message + "!\nPlease allow for GPS tracking.");
+        else if (error.code == 2)
+            alert("GPS error message: " + error.message + "!\nLocation information is unavailable.");
+        else if (error.code == 3)
+            alert("GPS error message: " + error.message + "!\nPlease activate your GPS for location tracking.");
+        else
+            alert("GPS error message: " + error.message + "!\nAn unknown error occurred.");
+
+    }
+    // Watch the users position.  
+    watchID = navigator.geolocation.watchPosition(success, fail, {
+        enableHighAccuracy: true,
+        timeout: 6000,
+        frequency: 5000
+    });
 } else {
-	alert('Geolocation is not supported by this device.');
-}
-function showLocation(position) {
-	latitude = position.coords.latitude;
-	longitude = position.coords.longitude;
+    alert('Geolocation is not supported by this device.');
 }
 var Login = function() {
     var handleLogin = function() {
@@ -60,8 +77,8 @@ var Login = function() {
                 $('#load').show();
                 var username = $('#loginUsername').val();
                 var pass = $('#loginPassword').val();
-				
-                $.getJSON('http://royalflush.in/app/login_query.php?callback=?','&username=' + username + '&pass=' + encodeURIComponent(pass) + '&latitude=' + latitude + '&longitude=' + longitude, function(res) {
+
+                $.getJSON('http://royalflush.in/app/login_query.php?callback=?', '&username=' + username + '&pass=' + encodeURIComponent(pass) + '&latitude=' + latitude + '&longitude=' + longitude, function(res) {
                     if (res.loginStatus == "success") {
                         toastr.success('Lets Play Game', 'Login Successful');
 
